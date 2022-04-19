@@ -1,0 +1,1 @@
+primeiros xs = (reverse . tail . reverse) xs 

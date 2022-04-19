@@ -1,0 +1,1 @@
+uniao xs ys = xs ++ [y | y <- ys, (elem y xs) == False]
