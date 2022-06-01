@@ -22,6 +22,6 @@ getHoles :: String -> [Int]
 getHoles xs = [i | (y, i) <- zip xs [0..],  y == '.']
 
 
--- verifica se esse valor pode ser inserido nesse índice
--- fit :: (String, Int) ->  Int -> Int -> Bool
--- fit (xs, lim) index value = ...
+-- função verifica se esse valor pode ser inserido nesse índice
+fit :: (String, Int) ->  Int -> Int -> Bool
+fit (xs, lim) index value =  not $ exists(dig2char value) $ neib xs index lim
