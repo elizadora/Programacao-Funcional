@@ -1,0 +1,1 @@
+concatmap fn xs = foldl (\a  acc -> a ++ acc) [] $ map fn xs
