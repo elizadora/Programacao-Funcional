@@ -15,7 +15,7 @@ dig2char dig = fromJust $ lookup dig $ zip [0..9]  ['0'..'9']
 
 --função que insere esse valor nesse index e retorna o novo vetor resultante
 set :: String -> Int -> Int -> String
-set xs index value = take (index - 1) xs ++ [dig2char value] ++ drop (index + 1) xs
+set xs index value = take (index) xs ++ [dig2char value] ++ drop (index + 1) xs
 
 --função qeu pega as posições de todos os .
 getHoles :: String -> [Int]
@@ -26,10 +26,13 @@ getHoles xs = [i | (y, i) <- zip xs [0..],  y == '.']
 fit :: (String, Int) ->  Int -> Int -> Bool
 fit (xs, lim) index value =  not $ exists(dig2char value) $ neib xs index lim
 
--- solve :: (String, Int) -> [Int] -> Int -> Maybe String
--- solve (xs, lim) holes hindex 
---     | hindex == length (getHoles xs) = Just xs
---     |
+solve :: (String, Int) -> [Int] -> Int -> Maybe String
+solve (xs, lim) holes hindex 
+    | hindex == length holes = Just xs
+    | null fitTrue  = solve (xs, lim) holes (hindex - 1)
+    | otherwise = solve(set xs (holes !! hindex) (head fitTrue), lim) holes (hindex + 1)
+    where
+        fitTrue = [ y | y <- [0..lim], fit (xs, lim) (holes !! hindex) y] 
 
 
 mainSolver :: String -> Int -> String
