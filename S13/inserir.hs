@@ -1,4 +1,1 @@
-inserir x [] = [x]
-inserir x y = if x < head y 
-                then x:y 
-                else (head y):inserir x (tail y)
+inserir x y = [a | a <- y, a <= x] ++ [x] ++ [b | b <- y, b > x] 
